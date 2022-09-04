@@ -10,11 +10,11 @@ public class Bank {
     }
 
     public boolean addCustomer(Customer client) {
-        boolean flag = false;
+        boolean addedCustomer = false;
         if (numberOfCustomers < clients.length) {
             clients[numberOfCustomers] = client;
             numberOfCustomers++;
-            flag = true;
+            addedCustomer = true;
         }
         return flag;
     }
