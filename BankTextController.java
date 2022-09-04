@@ -39,9 +39,7 @@ public class BankTextController {
             for (j = 0; j < 3; j++) {
                 tableOfCustomers[i][j] = fields[j];
             }
-
         }
-
         return tableOfCustomers;
     }
 
@@ -85,13 +83,11 @@ public class BankTextController {
                 accounts = accounts + ", " + fields[j];
                 j = j + 2;
             }
-
             customerTable[0][3] = accounts;
 
         } else {
             customerTable = null;
         }
-
         return customerTable;
     }
 }

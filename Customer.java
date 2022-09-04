@@ -45,19 +45,16 @@ public class Customer {
 
     public boolean addAccount(Account account) {
         boolean flag = false;
-
         if (numberOfAccounts < accounts.length) {
             accounts[numberOfAccounts] = account;
             numberOfAccounts++;
             flag = true;
         }
-
         return flag;
     }
 
     public boolean removeAccount(int IDAccount) {
         boolean flag = false;
-
         for (int i = 0; i < numberOfAccounts; i++) {
             if (accounts[i].getIDAccount() == IDAccount) {
                 accounts[i] = accounts[numberOfAccounts - 1];
@@ -66,19 +63,16 @@ public class Customer {
                 flag = true;
             }
         }
-
         return flag;
     }
 
     public Account searchAccount(int IDAccount) {
         Account temp = null;
-
         for (Account account : accounts) {
             if (account.getIDAccount() == IDAccount) {
                 temp = account;
             }
         }
-
         return temp;
     }
 
@@ -88,14 +82,12 @@ public class Customer {
 
     public boolean equals(Object obj) {
         boolean flag = false;
-
         if (obj != null && obj instanceof Customer) {
             Customer customerTemp = (Customer) obj;
             if (this.IDCustomer == customerTemp.IDCustomer) {
                 flag = true;
             }
         }
-
         return flag;
     }
 
@@ -108,8 +100,6 @@ public class Customer {
         for (int i = 0; i < numberOfAccounts; i++) {
             output += accounts[i].toString() + "\n";
         }
-
         return output;
     }
-
 }

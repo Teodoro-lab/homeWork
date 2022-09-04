@@ -21,7 +21,6 @@ public class Account {
         if (balance >= ammount) {
             balance = balance - ammount;
         }
-
         return balance;
     }
 
