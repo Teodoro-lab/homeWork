@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bank.controller;
 
 import java.util.ArrayList;
@@ -11,33 +6,43 @@ import java.util.Hashtable;
 
 public class BankTextController {
 
+    /**
+     * @param Filename the name of the file containing the information of the
+     *                 customers
+     * @return A table/matrix of the data recovered from the file
+     */
     public String[][] getTable(String Filename) {
-        String array;
+
         String accounts;
-        String[] split;
+        String[] fields;
 
         BankTextReader bankBuilder = new BankTextReader();
-        ArrayList<String> input = bankBuilder.bankReader(Filename);
+        ArrayList<String> strCustomerLst = bankBuilder.bankReader(Filename);
 
-        String[][] output = new String[input.size()][4];
+        String[][] tableOfCustomers = new String[strCustomerLst.size()][4];
 
-        int i, j;
-        for (i = 0; i < input.size(); i++) {
-            array = input.get(i);
-            split = array.split(",");
+        for (int i = 0; i < strCustomerLst.size(); i++) {
+            customerInfo = strCustomerLst.get(i);
+            fields = customerInfo.split(",");
 
-            accounts = split[3];
-            for (j = 6; j < split.length; j++) {
-                accounts = accounts + ", " + split[j];
+            accounts = fields[3];
+
+            // reads all the IDAccount and store it in a single element of the table
+            int j;
+            for (j = 6; j < fields.length; j++) {
+                accounts = accounts + ", " + fields[j];
                 j = j + 2;
             }
 
-            output[i][3] = accounts;
+            // load the data in the table
+            tableOfCustomers[i][3] = accounts;
             for (j = 0; j < 3; j++) {
-                output[i][j] = split[j];
+                tableOfCustomers[i][j] = fields[j];
             }
+
         }
-        return output;
+
+        return tableOfCustomers;
     }
 
     public String[] getHeader() {
@@ -55,38 +60,38 @@ public class BankTextController {
      * la informacion del resultado de la busqueda. Si no existe, regresa
      * un apuntador null
      */
-    public String[][] getHashTable(String key) {
+    public String[][] getCustomerTableFromHash(String key, Hashtable<String, String> customerHash) {
         BankTextReader bankBuilder = new BankTextReader();
-        Hashtable<String, String> input = bankBuilder.bankHashReader("Bank.txt");
-        String[][] output = { { " ", " ", " ", " " } };
+        String[][] customerTable = { { " ", " ", " ", " " } };
 
-        // Si existe el elemento
-        if (input.containsKey(key)) {
-            String line;
+        if (customerHash.containsKey(key)) {
+            String customerInfo;
             String accounts;
-            String[] split;
+            String[] fields;
 
-            // Recibe la linea del .txt correspondiente
-            line = input.get(key);
+            // Recibe la información del cliente del .txt correspondiente
+            customerInfo = customerHash.get(key);
             // y lo divide en los elementos necesarios para mostrarlo en una tabla
-            split = line.split(",");
-            // colocandolos en la matriz output
-
+            fields = customerInfo.split(",");
+            // colocandolos en la matriz customerTable
             int j;
             for (j = 0; j < 3; j++) {
-                output[0][j] = split[j];
+                customerTable[0][j] = fields[j];
             }
 
             // acomoda todos los IDAccount en un solo elemento de la matriz
-            accounts = split[3];
-            for (j = 6; j < split.length; j++) {
-                accounts = accounts + ", " + split[j];
+            accounts = fields[3];
+            for (j = 6; j < fields.length; j++) {
+                accounts = accounts + ", " + fields[j];
                 j = j + 2;
             }
-            output[0][3] = accounts;
+
+            customerTable[0][3] = accounts;
+
         } else {
-            output = null;
+            customerTable = null;
         }
-        return output;
+
+        return customerTable;
     }
 }
