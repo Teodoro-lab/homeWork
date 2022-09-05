@@ -59,7 +59,6 @@ public class BankTextController {
      * un apuntador null
      */
     public String[][] getCustomerTableFromHash(String key, Hashtable<String, String> customerHash) {
-        BankTextReader bankBuilder = new BankTextReader();
         String[][] customerTable = { { " ", " ", " ", " " } };
 
         if (customerHash.containsKey(key)) {

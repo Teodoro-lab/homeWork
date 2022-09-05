@@ -41,7 +41,6 @@ public class BankTextReader {
         String key;
 
         for (String customerInfo : strCustomerLst) {
-            customerInfo = array.get(i);
             fields = customerInfo.split(",", 4);
 
             // Key es el FirstName + LastName
